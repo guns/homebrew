@@ -26,8 +26,8 @@ class Figlet < Formula
   end
 
   def install
-    File.chmod 0666, 'Makefile'
-    File.chmod 0666, 'showfigfonts'
+    File.chmod 0644, 'Makefile'
+    File.chmod 0644, 'showfigfonts'
     man6.mkpath
     bin.mkpath
 

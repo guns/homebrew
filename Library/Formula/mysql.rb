@@ -22,6 +22,10 @@ class Mysql < Formula
     ]
   end
 
+  def var
+    '/srv/db'
+  end
+
   def patches; DATA; end
 
   def install
@@ -57,8 +61,6 @@ class Mysql < Formula
     system "cmake", *args
     system "make"
     system "make install"
-
-    (prefix+'com.mysql.mysqld.plist').write startup_plist
 
     # Don't create databases inside of the prefix!
     # See: https://github.com/mxcl/homebrew/issues/4975
@@ -112,28 +114,6 @@ class Mysql < Formula
     You may also need to edit the plist to use the correct "UserName".
 
     EOS
-  end
-
-  def startup_plist; <<-EOPLIST.undent
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>KeepAlive</key>
-      <true/>
-      <key>Label</key>
-      <string>com.mysql.mysqld</string>
-      <key>Program</key>
-      <string>#{bin}/mysqld_safe</string>
-      <key>RunAtLoad</key>
-      <true/>
-      <key>UserName</key>
-      <string>#{`whoami`.chomp}</string>
-      <key>WorkingDirectory</key>
-      <string>#{var}</string>
-    </dict>
-    </plist>
-    EOPLIST
   end
 end
 
