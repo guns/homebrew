@@ -1,7 +1,7 @@
 require 'formula'
 
 class HtopVi < Formula
-  head 'git://github.com/guns/htop-vi.git', :tag => 'osx-vi-keys'
+  head 'git://github.com/guns/htop-vi.git', :branch => 'osx-vi-keys'
   homepage 'http://htop.sourceforge.net/'
 
   def install
