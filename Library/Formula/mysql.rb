@@ -24,7 +24,7 @@ class Mysql < Formula
   end
 
   def var
-    '/srv/db'
+    Pathname.new '/srv/db'
   end
 
   # The CMAKE patches are so that on Lion we do not detect a private
