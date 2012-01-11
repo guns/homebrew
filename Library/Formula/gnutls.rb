@@ -19,6 +19,7 @@ class Gnutls < Formula
 
   def install
     ENV.universal_binary	# build fat so wine can use it
+    ENV.append 'LDFLAGS', '-ltasn1' # find external libtasn1
     system "autoreconf" # necessary for lib/configure.ac patch to work
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
