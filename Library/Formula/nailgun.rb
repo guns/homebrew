@@ -8,7 +8,7 @@ class Nailgun < Formula
   def script
     <<-EOS
 #!/bin/bash
-exec java -server -jar "#{prefix}/nailgun-0.7.1.jar"
+exec java -server -jar "#{prefix}/nailgun-0.7.1.jar" 127.0.0.1
     EOS
   end
 
