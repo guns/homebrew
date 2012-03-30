@@ -293,7 +293,7 @@ module MacOS extend self
     else
       # yes this seems dumb, but we can't throw because the existance of
       # dev tools is not mandatory for installing formula. Eventually we
-      # should make forumla specify if they need dev tools or not.
+      # should make formula specify if they need dev tools or not.
       "/usr/bin"
     end
   end
@@ -467,7 +467,9 @@ module MacOS extend self
   end
 
   def x11_installed?
-    Pathname.new('/usr/X11/lib/libpng.dylib').exist?
+    %w[/opt/X11/lib/libpng.dylib /usr/X11/lib/libpng.dylib].map do |f|
+      Pathname.new(f).exist?
+    end.any?
   end
 
   def macports_or_fink_installed?

@@ -59,9 +59,10 @@ class Postgresql < Formula
 
     system "./configure", *args
     system "make install-world"
+  end
 
-    plist_path.write startup_plist
-    plist_path.chmod 0644
+  def var
+    Pathname.new '/srv/db'
   end
 
   def check_python_arch
