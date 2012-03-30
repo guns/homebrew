@@ -265,12 +265,13 @@ Please take one of the following actions:
     opoo "You do not have X11 installed, this formula may not build." if not MacOS.x11_installed?
 
     # There are some config scripts (e.g. freetype) here that should go in the path
-    prepend 'PATH', '/usr/X11/bin', ':'
+    pre = File.directory?('/opt/X11') ? 'opt' : 'usr'
+    prepend 'PATH', "/#{pre}/X11/bin", ':'
     # CPPFLAGS are the C-PreProcessor flags, *not* C++!
-    append 'CPPFLAGS', '-I/usr/X11/include'
-    append 'LDFLAGS', '-L/usr/X11/lib'
+    append 'CPPFLAGS', "-I/#{pre}/X11/include"
+    append 'LDFLAGS', "-L/#{pre}/X11/lib"
     # CMake ignores the variables above
-    append 'CMAKE_PREFIX_PATH', '/usr/X11', ':'
+    append 'CMAKE_PREFIX_PATH', "/#{pre}/X11", ':'
   end
   alias_method :libpng, :x11
 

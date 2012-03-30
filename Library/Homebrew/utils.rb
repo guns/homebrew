@@ -467,7 +467,9 @@ module MacOS extend self
   end
 
   def x11_installed?
-    Pathname.new('/usr/X11/lib/libpng.dylib').exist?
+    %w[/opt/X11/lib/libpng.dylib /usr/X11/lib/libpng.dylib].map do |f|
+      Pathname.new(f).exist?
+    end.any?
   end
 
   def macports_or_fink_installed?
