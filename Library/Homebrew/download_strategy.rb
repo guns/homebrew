@@ -96,7 +96,7 @@ class CurlDownloadStrategy < AbstractDownloadStrategy
     when '____pkg'
       safe_system '/usr/sbin/pkgutil', '--expand', @tarball_path, File.basename(@url)
       chdir
-    when 'Rar!'
+    when /Rar!/
       quiet_safe_system 'unrar', 'x', {:quiet_flag => '-inul'}, @tarball_path
     else
       # we are assuming it is not an archive, use original filename
@@ -355,7 +355,7 @@ class GitDownloadStrategy < AbstractDownloadStrategy
       git_args = %w(git clone)
       git_args << "--depth" << "1" if support_depth?
       git_args << @url << @clone
-      safe_system *git_args
+      safe_system(*git_args)
     else
       puts "Updating #{@clone}"
       Dir.chdir(@clone) do
@@ -393,7 +393,6 @@ class GitDownloadStrategy < AbstractDownloadStrategy
         safe_system 'git', 'submodule', '--quiet', 'foreach', '--recursive', sub_cmd
       end
     end
-    ENV['GIT_DIR'] = cached_location+'.git'
   end
 end
 
