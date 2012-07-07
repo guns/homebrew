@@ -1,5 +1,6 @@
 require 'pathname'
 require 'exceptions'
+require 'macos'
 
 class Tty
   class <<self
